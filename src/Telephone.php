@@ -47,8 +47,8 @@ class Telephone
     ];
 
     /**
-     * @param string $input  [description]
-     * @param string $region [description]
+     * @param string $input  The phone number
+     * @param string $region The region or country of the phone number
      */
     public function __construct($input,$region = 'US')
     {
@@ -76,18 +76,32 @@ class Telephone
         $this->format_RFC3966       = $util->format($number, Format::RFC3966);
         
         //Get the parts
-        $this->country_code = $number->getCountryCode();
-        $this->extension    = $number->getExtension();
-        $this->area_code    = $this->extractAreaCode();
+        $this->country_code    = $number->getCountryCode();
+        $this->extension       = $number->getExtension();
+        $this->area_code       = $this->extractAreaCode();
+        $this->subscriber_code = $this->extractSubscriberCode();
     }
 
     protected function extractAreaCode()
     {
         if($this->region === 'US' && $this->isValid()){
-            $exp = '/^\+?(1)?\(?(\d{3})\)?(?:\s|\.|\-)?(\d{3})(?:\s|\.|\-)?(\d{4})$/';
+            $exp = '/^\+?(1)?\s?\(?(\d{3})\)?(?:\s|\.|\-)?(\d{3})(?:\s|\.|\-)?(\d{4})$/';
             preg_match($exp,$this->format_E164,$matches);
-            if(count($matches) >= 2){
+            if(count($matches) === 5){
                 return $matches[2];
+            }
+        }
+
+        return null;
+    }
+
+    protected function extractSubscriberCode()
+    {
+        if($this->region === 'US' && $this->isValid()){
+            $exp = '/^\+?(1)?\s?\(?(\d{3})\)?(?:\s|\.|\-)?(\d{3})(?:\s|\.|\-)?(\d{4})$/';
+            preg_match($exp,$this->format_E164,$matches);
+            if(count($matches) === 5){
+                return $matches[3] . $matches[4];
             }
         }
 
@@ -161,6 +175,14 @@ class Telephone
     public function getSubscriberCode()
     {
         return $this->subscriber_code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
