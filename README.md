@@ -7,7 +7,7 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/56f3252c35630e0029db0187/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56f3252c35630e0029db0187)
 [![Total Downloads](https://img.shields.io/packagist/dt/zenapply/php-telephone.svg?style=flat-square)](https://packagist.org/packages/zenapply/php-telephone)
 
-This package aims at providing an easy to use and organized telephone data-type class.
+This package aims at providing an easy to use telephone data-type class.
 
 ## Installation
 

@@ -1,6 +1,6 @@
 {
     "name": "zenapply/php-telephone",
-    "description": "A Telephone data type",
+    "description": "This package aims at providing an easy to use telephone data-type class",
     "keywords": [
         "telephone",
         "tylercd100",
