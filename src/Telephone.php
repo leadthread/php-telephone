@@ -26,6 +26,8 @@ class Telephone
     //Telephone extras
     protected $region;
     protected $input;
+    protected $valid;
+    protected $type;
 
     //Telephone types
     protected $typeMap = [
